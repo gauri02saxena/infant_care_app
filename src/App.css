@@ -10,7 +10,7 @@ img {
 }
 .App {
   min-height: 100vh;
-  width: 85vw;
+  width: 90vw;
   max-width: 1900px;
   margin: 0rem auto;
 }
@@ -27,8 +27,8 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-height:90px;
-  margin-top:0px;
+  max-height: 90px;
+  margin-top: 0px;
 }
 
 /* Hide navbar  */
@@ -45,11 +45,11 @@ nav {
   font-weight: 600;
 }
 
-.logo{
+.logo {
   max-width: 100px;
-  min-width:80px;
+  min-width: 80px;
   cursor: pointer;
-  margin-top:40px;
+  margin-top: 40px;
 }
 
 .home-container {
@@ -100,20 +100,16 @@ nav {
   background-color: #3e3232;
 }
 
-
-
 @media (min-width: 1024px) {
   .nav-links-container a {
     margin-right: 1rem;
     font-size: 1.1rem;
   }
 
-  .home-image{
+  .home-image {
     max-width: 50%;
-    max-height:50%;
-    
+    max-height: 50%;
   }
-
 }
 @media (max-width: 1023px) {
   .nav-logo-container {
@@ -125,17 +121,17 @@ nav {
   .nav-menu-container {
     display: flex;
   }
- 
+
   .home-container {
     /* Places image on top and text in bottom */
-    flex-direction: column-reverse;   
+    flex-direction: column-reverse;
     align-items: center;
     justify-content: center;
   }
   .about-section-container {
     flex-direction: column;
   }
-  
+
   .about-section-image-container {
     width: 100%;
     max-width: 400px;
@@ -158,14 +154,11 @@ nav {
     padding: 0.8rem 2rem;
     cursor: pointer;
   }
-  
+
   .App {
     max-width: 95vw;
   }
 }
 
-
 @media (max-width: 600px) {
- 
-  
 }
