@@ -25,6 +25,8 @@ const Home = () => {
           <img src={BannerImage} className="home-image" alt="banner"></img>
     
       </div>
+
+      
     </div>
   );
 };
