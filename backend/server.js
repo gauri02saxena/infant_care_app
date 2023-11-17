@@ -56,5 +56,71 @@ app.post("/login", async (req, res) => {
   }
 });
 
+
+// Middleware to authenticate and set user info in the request
+const authenticateToken = (req, res, next) => {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1]; // Bearer TOKEN_STRING
+
+  if (token == null) {
+    return res.sendStatus(401); // If no token, unauthorized
+  }
+
+  jwt.verify(token, "your-secret-key", (err, user) => {
+    if (err) {
+      return res.sendStatus(403); // If token is not valid, forbidden
+    }
+    req.user = user; // Set the user info in request
+    next();
+  });
+};
+
+// Profile Route
+app.get("/profile", authenticateToken, async (req, res) => {
+  try {
+    // Assuming the token includes the userId and not the email
+    const user = await User.findById(req.user.userId).select('-password'); // Exclude the password from the result
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    res.json(user); // Send user information excluding the password
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+
+
+
+//Vaccine Recommender 
+const vaccineSchedule = {
+  // Example schedule: age in months to vaccines
+  2: ['Rotavirus', 'DTaP', 'Hib', 'Polio', 'PCV', 'Hepatitis B'],
+  4: ['Rotavirus', 'DTaP', 'Hib', 'Polio', 'PCV'],
+  6: ['Rotavirus', 'DTaP', 'Hib', 'Polio', 'PCV', 'Hepatitis B','Pnb','sbi'],
+  // Add other ages and vaccines as appropriate
+};
+
+app.get('/vaccine-recommender/:userId', async (req, res) => {
+  const userId = req.params.userId;
+
+
+  try {
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).send('User not found');
+    }
+
+    const ageInMonths = user.infantAge; // Assuming the age is stored correctly
+    const recommendedVaccines = vaccineSchedule[ageInMonths] || [];
+    res.json({ recommendedVaccines });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('An error occurred while fetching vaccine recommendations');
+  }
+});
+
+
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
