@@ -1,0 +1,118 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Reem Kufi", sans-serif !important;
+  }
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  .App {
+    min-height: 100vh;
+    width: 90vw;
+    max-width: 1900px;
+    margin: 0rem auto;
+  }
+  body {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+  
+  body {
+    background-color: #f6f6f6;
+  }
+  
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-height: 90px;
+    margin-top: 0px;
+  }
+  
+  /* Hide navbar  */
+  .nav-menu-container {
+    display: none;
+  }
+  
+  .nav-links-container a {
+    margin-right: 3rem;
+  
+    text-decoration: none;
+    color: black;
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+  
+  .logo {
+    max-width: 100px;
+    min-width: 80px;
+    cursor: pointer;
+    margin-top: 40px;
+  }
+  
+  
+  @media (min-width: 1024px) {
+    .nav-links-container a {
+      margin-right: 1rem;
+      font-size: 1.1rem;
+    }
+  
+    .home-image {
+      max-width: 50%;
+      max-height: 50%;
+    }
+  }
+  @media (max-width: 1023px) {
+    .nav-logo-container {
+      max-width: 140px;
+    }
+    .nav-links-container {
+      display: none;
+    }
+    .nav-menu-container {
+      display: flex;
+    }
+  
+    .home-container {
+      /* Places image on top and text in bottom */
+      flex-direction: column-reverse;
+      align-items: center;
+      justify-content: center;
+    }
+    .about-section-container {
+      flex-direction: column;
+    }
+  
+    .about-section-image-container {
+      width: 100%;
+      max-width: 400px;
+    }
+    .heading {
+      text-align: center;
+      max-width: 90%;
+    }
+    .description {
+      text-align: center;
+      max-width: 80%;
+    }
+    .home-text-section {
+      justify-content: center;
+      align-items: center;
+      margin-top: 4rem;
+    }
+    .secondary-button {
+      font-size: 1rem;
+      padding: 0.8rem 2rem;
+      cursor: pointer;
+    }
+  
+    .App {
+      max-width: 95vw;
+    }
+  }
+  
+  @media (max-width: 600px) {
+  }
+  
