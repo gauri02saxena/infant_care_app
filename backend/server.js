@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("./models/User"); // You'll need to create this Mongoose model
+const Vaccine = require('./models/Vaccine'); // Adjust the path as per your project structure
 
 const app = express();
 app.use(express.json());
@@ -17,23 +18,44 @@ mongoose.connect("mongodb://127.0.0.1:27017/user", {
 });
 
 // Sign Up Route
-app.post("/signup", async (req, res) => {
+app.post('/signup', async (req, res) => {
   try {
+    // Extract user data from the request body
     const { parentName, infantName, infantAge, email, password } = req.body;
+
+    // Hash the password
     const hashedPassword = await bcrypt.hash(password, 12);
+
+    // Example standard vaccines data
+    const standardVaccines = [
+      { name: 'Hepatitis B', ageInMonths: 0 },
+      { name: 'Rotavirus', ageInMonths: 2 },
+      // Add other vaccines as per the schedule
+    ];
+
+    // Create vaccine documents
+    const vaccineDocs = await Vaccine.insertMany(standardVaccines);
+    const vaccineIds = vaccineDocs.map(vaccine => vaccine._id);
+
+    // Create a new user with vaccine IDs
     const newUser = new User({
       parentName,
       infantName,
       infantAge,
       email,
       password: hashedPassword,
+      vaccines: vaccineIds
     });
-    const savedUser = await newUser.save();
-    res.status(201).json({ userId: savedUser._id });
+
+    // Save the new user
+    await newUser.save();
+
+    res.status(201).json({ message: 'User created successfully', userId: newUser._id });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
+
 
 // Login Route
 app.post("/login", async (req, res) => {
@@ -120,6 +142,17 @@ app.get('/vaccine-recommender/:userId', async (req, res) => {
   }
 });
 
+//Logout route 
+const handleLogout = async () => {
+  // Call the logout endpoint
+  await fetch('http://localhost:5000/logout', { method: 'POST' });
+  
+  // Clear the token from storage
+  localStorage.removeItem('token');
+
+  // Redirect to the home page
+  window.location.href = '/';
+};
 
 
 const PORT = process.env.PORT || 5000;

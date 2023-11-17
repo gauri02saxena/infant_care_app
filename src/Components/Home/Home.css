@@ -116,3 +116,53 @@
   @media (max-width: 600px) {
   }
   
+  /* Home.css */
+.home-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  padding: 4rem 1rem;
+}
+
+.home-text-section {
+  max-width: 540px;
+}
+
+.heading {
+  font-size: 2.5rem;
+  color: #333;
+}
+
+.description {
+  font-size: 1.3rem;
+  color: #333;
+  margin-top: 1rem;
+}
+
+.secondary-button {
+  background-color: #988570; /* Replace with your button color */
+  color: #fff; /* This is white, replace with your button text color if different */
+  padding: 20px 30px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 30px; /* Adjust as needed for roundness */
+  font-weight: bolder;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s;
+  margin-top:2rem;
+}
+
+.secondary-button:hover {
+  background-color: #685d52;
+}
+
+.home-image {
+  max-width: 45%;
+  max-height:30%;
+  height: auto;
+  object-fit: cover;
+}
