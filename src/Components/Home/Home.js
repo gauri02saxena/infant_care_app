@@ -2,6 +2,7 @@ import React from "react";
 import "./Home.css";
 
 import Navbar from "../Navbar";
+import About from "../About/About";
 import Contact from "../Contact/Contact";
 import "../Contact/Contact.css";
 import BannerImage from "../../Assets/banner_img.jpeg";
@@ -37,7 +38,7 @@ const Home = () => {
           <img src={BannerImage} className="home-image" alt="banner"></img>
         </div>
       </div>
-
+      <About />
       <Contact></Contact>
     </div>
   );

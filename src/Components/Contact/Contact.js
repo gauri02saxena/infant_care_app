@@ -1,7 +1,5 @@
-
-
-import React from 'react';
-import './Contact.css';
+import React from "react";
+import "./Contact.css";
 
 const Footer = () => {
   return (
@@ -15,24 +13,42 @@ const Footer = () => {
           <div className="footer-column">
             <h3>Explore</h3>
             <ul>
-              <li><a href="#">Home</a></li>
-              <li><a href="#">About Us</a></li>
-              <li><a href="#">Services</a></li>
-              <li><a href="#">Blog</a></li>
+              <li>
+                <a href="#">Home</a>
+              </li>
+              <li>
+                <a href="#">About Us</a>
+              </li>
+              <li>
+                <a href="#">Services</a>
+              </li>
+              <li>
+                <a href="#">Blog</a>
+              </li>
             </ul>
           </div>
           <div className="footer-column">
-            <h3>Contact</h3>
-            <p>1234 Elm Street<br />City, State 12345</p>
-            <p>Email: contact@example.com</p>
-            <p>Phone: +1 (123) 456-7890</p>
+            <h3>Contact Us</h3>
+            <p>
+              206 Ashok vihar
+              <br />
+              Sector52,NewDelhi 15101
+            </p>
+            <p>Email: infantcare24@gmail.com</p>
+            <p>Phone: +91 810333XXXX</p>
           </div>
         </div>
       </div>
       <div className="footer-social">
-        <a href="#"><i className="fab fa-facebook"></i></a>
-        <a href="#"><i className="fab fa-twitter"></i></a>
-        <a href="#"><i className="fab fa-instagram"></i></a>
+        <a href="#">
+          <i className="fab fa-facebook"></i>
+        </a>
+        <a href="#">
+          <i className="fab fa-twitter"></i>
+        </a>
+        <a href="#">
+          <i className="fab fa-instagram"></i>
+        </a>
       </div>
     </footer>
   );

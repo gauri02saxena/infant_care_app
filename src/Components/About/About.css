@@ -1,0 +1,17 @@
+.about-container {
+    background-color: #988570; /* Same color as the header for consistency */
+    color: white; /* A color that matches the existing text */
+    padding: 50px 10%; /* Adjust padding to match the design */
+    text-align: center; /* Center the text */
+  }
+  
+  .about-container h2 {
+    font-size: 2.5em; /* Large font size for heading */
+    margin-bottom: 20px; /* Space between the heading and paragraph */
+  }
+  
+  .about-container p {
+    font-size: 1.2em; /* Slightly larger font size for readability */
+    line-height: 1.6; /* Spacing between lines */
+  }
+  
