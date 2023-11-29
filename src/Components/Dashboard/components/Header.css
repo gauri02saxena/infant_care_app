@@ -9,6 +9,7 @@
     align-items: center;
     justify-content: end;
     padding: 10px;
+    color:#a67c52;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     background-color: #fff; /* Change as needed */
   }

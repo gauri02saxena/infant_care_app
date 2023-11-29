@@ -28,9 +28,51 @@ app.post('/signup', async (req, res) => {
 
     // Example standard vaccines data
     const standardVaccines = [
-      { name: 'Hepatitis B', ageInMonths: 0 },
+      { name: 'Oral Polio Vaccine (OPV) - 1', ageInMonths: 1.5 },
+      { name: 'Pentavalent - 1', ageInMonths: 1.5 },
+      { name: 'Rotavirus Vaccine (RVV) - 1', ageInMonths: 1.5 },
+      { name: 'Pneumococcal Conjugate Vaccine (PCV) - 1*', ageInMonths: 1.5 },
+      { name: 'Inactivated Polio Vaccine (fIPV) - 1', ageInMonths: 1.5 },
       { name: 'Rotavirus', ageInMonths: 2 },
-      // Add other vaccines as per the schedule
+      { name: 'DTaP', ageInMonths: 2 },
+      { name: 'Hib', ageInMonths: 2 },
+      { name: 'Polio', ageInMonths: 2 },
+      { name: 'PCV', ageInMonths: 2 },
+      { name: 'Hepatitis B', ageInMonths: 2 },
+      { name: 'Pentavalent - 2', ageInMonths: 2.5 },
+      { name: 'Oral Polio Vaccine (OPV) - 2', ageInMonths: 2.5 },
+      { name: 'Rotavirus Vaccine (RVV) - 2', ageInMonths: 2.5 },
+      { name: 'Pentavalent - 3', ageInMonths: 3.5 },
+      { name: 'Oral Polio Vaccine (OPV) - 3', ageInMonths: 3.5 },
+      { name: 'Rotavirus Vaccine (RVV) - 3', ageInMonths: 3.5 },
+      { name: 'Pneumococcal Conjugate Vaccine (PCV) - 2', ageInMonths: 3.5 },
+      { name: 'Inactivated Polio Vaccine (fIPV) - 2', ageInMonths: 3.5 },
+      { name: 'Rotavirus', ageInMonths: 4 },
+      { name: 'DTaP', ageInMonths: 4 },
+      { name: 'Hib', ageInMonths: 4 },
+      { name: 'Polio', ageInMonths: 4 },
+      { name: 'PCV', ageInMonths: 4 },
+      { name: 'Rotavirus', ageInMonths: 6 },
+      { name: 'DTaP', ageInMonths: 6 },
+      { name: 'Hib', ageInMonths: 6 },
+      { name: 'Polio', ageInMonths: 6 },
+      { name: 'PCV', ageInMonths: 6 },
+      { name: 'Hepatitis B', ageInMonths: 6 },
+      { name: 'Pnb', ageInMonths: 6 },
+      { name: 'sbi', ageInMonths: 6 },
+      { name: 'Measles & Rubella (MR) - 1', ageInMonths: 9 },
+      { name: 'Japanese Encephalitis (JE-1)', ageInMonths: 9 },
+      { name: 'Pneumococcal Conjugate Vaccine - Booster*', ageInMonths: 9 },
+      { name: 'Measles & Rubella (MR) - 1', ageInMonths: 10 },
+      { name: 'Japanese Encephalitis (JE-1)', ageInMonths: 10 },
+      { name: 'Pneumococcal Conjugate Vaccine - Booster*', ageInMonths: 10 },
+      { name: 'Measles & Rubella (MR) - 1', ageInMonths: 11 },
+      { name: 'Japanese Encephalitis (JE-1)', ageInMonths: 11 },
+      { name: 'Pneumococcal Conjugate Vaccine - Booster*', ageInMonths: 11 },
+      { name: 'Measles & Rubella (MR) - 1', ageInMonths: 12 },
+      { name: 'Japanese Encephalitis (JE-1)', ageInMonths: 12 },
+      { name: 'Pneumococcal Conjugate Vaccine - Booster*', ageInMonths: 12 }
+      // Add other vaccines and ages as necessary
     ];
 
     // Create vaccine documents
@@ -117,15 +159,42 @@ app.get("/profile", authenticateToken, async (req, res) => {
 //Vaccine Recommender 
 const vaccineSchedule = {
   // Example schedule: age in months to vaccines
+  1.5:['Oral Polio Vaccine (OPV) - 1','Pentavalent - 1','Rotavirus Vaccine (RVV) - 1','Pneumococcal Conjugate Vaccine (PCV) - 1*','Inactivated Polio Vaccine (fIPV) - 1'],
   2: ['Rotavirus', 'DTaP', 'Hib', 'Polio', 'PCV', 'Hepatitis B'],
+  2.5:['Pentavalent - 2','Oral Polio Vaccine (OPV) - 2','Oral Polio Vaccine (OPV) - 2','Rotavirus Vaccine (RVV) - 2'],
+  3.5:['Pentavalent - 3','Oral Polio Vaccine (OPV) - 3','Rotavirus Vaccine (RVV) - 3', 'Pneumococcal Conjugate Vaccine (PCV) - 2','Inactivated Polio Vaccine (fIPV) - 2'],
+  
   4: ['Rotavirus', 'DTaP', 'Hib', 'Polio', 'PCV'],
-  6: ['Rotavirus', 'DTaP', 'Hib', 'Polio', 'PCV', 'Hepatitis B','Pnb','sbi'],
+  6: ['Rotavirus', 'DTaP', 'Hib', 'Polio', 'PCV', 'Hepatitis B'],
+  9:['Measles & Rubella (MR) - 1','Japanese Encephalitis (JE-1)','Pneumococcal Conjugate Vaccine - Booster*'],
+  10:['Measles & Rubella (MR) - 1','Japanese Encephalitis (JE-1)','Pneumococcal Conjugate Vaccine - Booster*'],
+  11:['Measles & Rubella (MR) - 1','Japanese Encephalitis (JE-1)','Pneumococcal Conjugate Vaccine - Booster*'],
+  12:['Measles & Rubella (MR) - 1','Japanese Encephalitis (JE-1)','Pneumococcal Conjugate Vaccine - Booster*'],
+
   // Add other ages and vaccines as appropriate
 };
 
+// app.get('/vaccine-recommender/:userId', async (req, res) => {
+//   const userId = req.params.userId;
+
+
+//   try {
+//     const user = await User.findById(userId);
+//     if (!user) {
+//       return res.status(404).send('User not found');
+//     }
+
+//     const ageInMonths = user.infantAge; // Assuming the age is stored correctly
+//     const recommendedVaccines = vaccineSchedule[ageInMonths] || [];
+//     res.json({ recommendedVaccines });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).send('An error occurred while fetching vaccine recommendations');
+//   }
+// });
+// Vaccine Recommender Route
 app.get('/vaccine-recommender/:userId', async (req, res) => {
   const userId = req.params.userId;
-
 
   try {
     const user = await User.findById(userId);
@@ -134,13 +203,21 @@ app.get('/vaccine-recommender/:userId', async (req, res) => {
     }
 
     const ageInMonths = user.infantAge; // Assuming the age is stored correctly
-    const recommendedVaccines = vaccineSchedule[ageInMonths] || [];
+    let recommendedVaccines = vaccineSchedule[ageInMonths];
+
+    if (!recommendedVaccines) {
+      const ages = Object.keys(vaccineSchedule).map(age => parseFloat(age)).sort((a, b) => a - b);
+      const nextAge = ages.find(age => age > ageInMonths);
+      recommendedVaccines = nextAge ? vaccineSchedule[nextAge] : [];
+    }
+
     res.json({ recommendedVaccines });
   } catch (error) {
     console.error(error);
     res.status(500).send('An error occurred while fetching vaccine recommendations');
   }
 });
+
 
 //Logout route 
 const handleLogout = async () => {
