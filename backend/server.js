@@ -257,7 +257,7 @@ app.get("/vaccine-recommender/:userId", async (req, res) => {
 // Vaccine Tracker Route
 app.get('/vaccine-tracker/:userId', authenticateToken, async (req, res) => {
   const userId = req.params.userId;
-  
+
   try {
     const user = await User.findById(userId);
     if (!user) {
@@ -274,6 +274,13 @@ app.get('/vaccine-tracker/:userId', authenticateToken, async (req, res) => {
       }
     }
 
+    // Filter out administered vaccines
+    if (user.administeredVaccines) {
+      dueVaccines = dueVaccines.filter(vaccine => 
+        !user.administeredVaccines.some(administered => administered.name === vaccine)
+      );
+    }
+
     // Remove duplicates and sort
     dueVaccines = [...new Set(dueVaccines)].sort();
 
@@ -281,6 +288,32 @@ app.get('/vaccine-tracker/:userId', authenticateToken, async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).send("Error occurred while fetching vaccine tracker data");
+  }
+});
+
+
+// POST route to mark a vaccine as administered
+app.post('/vaccine-administered/:userId', authenticateToken, async (req, res) => {
+  const { userId } = req.params;
+  const { vaccineName } = req.body;
+
+  try {
+    // Find the user and update
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).send("User not found");
+    }
+
+    // Add the vaccine to administered vaccines if not already there
+    if (!user.administeredVaccines.some(vaccine => vaccine.name === vaccineName)) {
+      user.administeredVaccines.push({ name: vaccineName, dateAdministered: new Date() });
+      await user.save();
+    }
+
+    res.status(200).send("Vaccine marked as administered");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error updating vaccine information");
   }
 });
 
