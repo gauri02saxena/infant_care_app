@@ -1,17 +1,54 @@
-.header-bar {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    background-color: #eceff1; /* Light grey background, you can change this */
-    padding: 10px 20px; /* Add some padding */
-  }
-  
-  .baby-image {
-    width: 50px; /* You can adjust the size as needed */
-    height: 50px;
-    border-radius: 50%; /* Makes the image circular */
-    margin-right: 10px; /* Adds some space between the image and the text */
-  }
-  
-  /* Add any additional styling as needed */
-  
+ *{
+  margin:0;
+  padding:0;
+  text-decoration: none;
+}
+
+.dash .container{
+  display:flex;
+}
+main{
+  width: 100%;
+  padding: 20px;
+}
+.dash .sidebar{
+  background: #000;
+  color: #fff;
+  height: 100vh;
+  width: 200px;
+  transition: all 0.5s;
+}
+.dash .top_section{
+  display: flex;
+  align-items:center;
+  padding:20px 15px;
+}
+.dash .logo{
+  font-size: 30px;
+}
+.dash .bars{
+  display: flex;
+  font-size: 25px;
+  margin-left: 50px;
+}
+.dash .link{
+  display: flex;
+  color: #fff;
+  padding: 10px 15px;
+  gap: 15px;
+  transition: all 0.5s;
+}
+.dash .link:hover{
+  background:lightskyblue;
+  color: #000;
+  transition: all 0.5s;
+}
+.dash .active{
+  background: lightskyblue;
+  color: #000;
+}
+.dash .icon, .link_text{
+  font-size: 20px;
+}
+
+

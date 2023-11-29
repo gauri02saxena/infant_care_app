@@ -1,29 +1,36 @@
-* {
-    margin: 0;
-    padding: 0;
+*{
+  margin:0;
+  padding:0;
+  text-decoration: none;
+}
+
+.home {
+  margin-left: 50px;
+  
+   max-width:90vw;
     box-sizing: border-box;
     font-family: "Reem Kufi", sans-serif !important;
   }
-  img {
+  .home img {
     max-width: 100%;
     height: auto;
   }
-  .App {
+  .home .App {
     min-height: 100vh;
     width: 90vw;
     max-width: 1900px;
     margin: 0rem auto;
   }
-  body {
+  .home body {
     max-width: 100%;
     overflow-x: hidden;
   }
   
-  body {
+  .home body {
     background-color: #f6f6f6;
   }
   
-  nav {
+ .home  nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -32,11 +39,11 @@
   }
   
   /* Hide navbar  */
-  .nav-menu-container {
+  .home .nav-menu-container {
     display: none;
   }
   
-  .nav-links-container a {
+  .home .nav-links-container a {
     margin-right: 3rem;
   
     text-decoration: none;
@@ -45,7 +52,7 @@
     font-weight: 600;
   }
   
-  .logo {
+  .home .logo {
     max-width: 100px;
     min-width: 80px;
     cursor: pointer;
@@ -54,61 +61,61 @@
   
   
   @media (min-width: 1024px) {
-    .nav-links-container a {
+    .home .nav-links-container a {
       margin-right: 1rem;
       font-size: 1.1rem;
     }
   
-    .home-image {
+    .home .home-image {
       max-width: 50%;
       max-height: 50%;
     }
   }
   @media (max-width: 1023px) {
-    .nav-logo-container {
+    .home .nav-logo-container {
       max-width: 140px;
     }
-    .nav-links-container {
+    .home .nav-links-container {
       display: none;
     }
-    .nav-menu-container {
+    .home .nav-menu-container {
       display: flex;
     }
   
-    .home-container {
+    .home .home-container {
       /* Places image on top and text in bottom */
       flex-direction: column-reverse;
       align-items: center;
       justify-content: center;
     }
-    .about-section-container {
+    .home .about-section-container {
       flex-direction: column;
     }
   
-    .about-section-image-container {
+    .home .about-section-image-container {
       width: 100%;
       max-width: 400px;
     }
-    .heading {
+    .home .heading {
       text-align: center;
       max-width: 90%;
     }
-    .description {
+    .home .description {
       text-align: center;
       max-width: 80%;
     }
-    .home-text-section {
+    .home .home-text-section {
       justify-content: center;
       align-items: center;
       margin-top: 4rem;
     }
-    .secondary-button {
+    .home .secondary-button {
       font-size: 1rem;
       padding: 0.8rem 2rem;
       cursor: pointer;
     }
   
-    .App {
+    .home .App {
       max-width: 95vw;
     }
   }
@@ -117,7 +124,7 @@
   }
   
   /* Home.css */
-.home-container {
+.home .home-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -125,7 +132,7 @@
   padding: 4rem 1rem;
 }
 
-.home-text-section {
+.home .home-text-section {
   max-width: 540px;
 }
 
@@ -134,13 +141,13 @@
   color: #333;
 }
 
-.description {
+.home .description {
   font-size: 1.3rem;
   color: #333;
   margin-top: 1rem;
 }
 
-.secondary-button {
+.home .secondary-button {
   background-color: #988570; /* Replace with your button color */
   color: #fff; /* This is white, replace with your button text color if different */
   padding: 20px 30px;
@@ -156,11 +163,11 @@
   margin-top:2rem;
 }
 
-.secondary-button:hover {
+.home .secondary-button:hover {
   background-color: #685d52;
 }
 
-.home-image {
+.home .home-image {
   max-width: 45%;
   max-height:30%;
   height: auto;

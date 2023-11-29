@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; 
 import './LoginSignup.css';
 
+
 const LoginSignup = () => {
+
+  const navigate = useNavigate(); // Instantiate useNavigate here
+
   const [isLogin, setIsLogin] = useState(true);
   // States for login
   const [loginEmail, setLoginEmail] = useState('');
@@ -23,7 +28,7 @@ const LoginSignup = () => {
       });
       if (response.status === 200) {
         console.log('Login successful');
-        // Additional logic for successful login (e.g., storing token, redirecting)
+        navigate('/dashboard'); // Redirect to the dashboard
       } else {
         console.log('Login failed');
         // Logic for handling login failure
@@ -33,6 +38,7 @@ const LoginSignup = () => {
       // Logic for handling network or server error
     }
   };
+  
 
   const handleSignUp = async (event) => {
     event.preventDefault();
@@ -45,6 +51,7 @@ const LoginSignup = () => {
         password: signupPassword,
       });
       console.log('Signup successful', response.data);
+      alert('Signup successful!');
       // Additional logic for successful signup
     } catch (error) {
       console.error('Signup failed:', error.response ? error.response.data : 'Server error');

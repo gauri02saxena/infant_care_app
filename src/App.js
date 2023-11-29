@@ -1,4 +1,5 @@
-// import "./App.css";
+
+import Dashboard from "./Components/Dashboard/Dashboard";
 import Home from "./Components/Home/Home";
 import Login from "./Components/Login/Login";
 
@@ -12,6 +13,8 @@ function App() {
           <Route path="/" element={<Home />}></Route>
 
           <Route path="/login" element={<Login />}></Route>
+          <Route path="/dashboard/*" element={<Dashboard />}></Route>
+
         </Routes>
       </BrowserRouter>
     </div>

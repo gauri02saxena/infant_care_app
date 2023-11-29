@@ -157,3 +157,29 @@ const handleLogout = async () => {
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+
+const handleLogin = async (event) => {
+  event.preventDefault();
+  try {
+    const response = await axios.post('http://localhost:5000/login', {
+      email: loginEmail,
+      password: loginPassword,
+    });
+
+    if (response.status === 200) {
+      console.log('Login successful');
+      // Store the token
+      localStorage.setItem('token', response.data.token);
+      
+      // Redirect to dashboard or handle dashboard data here
+      history.push('/dashboard', { dashboardData: response.data.dashboardData });
+    } else {
+      console.log('Login failed');
+      // Logic for handling login failure
+    }
+  } catch (error) {
+    console.error('Login failed:', error.response ? error.response.data : 'Server error');
+    // Logic for handling network or server error
+  }
+};

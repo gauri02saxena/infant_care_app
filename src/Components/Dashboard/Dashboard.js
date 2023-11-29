@@ -1,23 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import './Dashboard.css';
-import babyImage from './path-to-your-image.jpg'; // Replace with the path to your baby image
+import React from "react";
+import "./Dashboard.css";
+import { Routes, Route, Outlet } from "react-router-dom";
+import Sidebar from "./components/Sidebar";
+import Profile from "./pages/Profile.jsx";
+import Recommender from "./pages/Recommender.jsx";
+import Tracker from "./pages/Tracker.jsx";
+import Header from "./components/Header";
 
-const HeaderBar = () => {
-  const [infantName, setInfantName] = useState('');
-
-  useEffect(() => {
-    // This is where you would fetch the infant's name from the database
-    // For now, I will just set a static name
-    setInfantName('Charlie');
-    // Replace the above line with your actual database fetch logic
-  }, []);
-
+const Dashboard = () => {
   return (
-    <div className="header-bar">
-      <img src={babyImage} alt="Baby" className="baby-image" />
-      <h1>Hello, {infantName}</h1>
-    </div>
+    <div className="dash">
+      <Header />
+      <Sidebar />
+      <div className="dashboard-content">
+        <Routes>
+          <Route path="profile" element={<Profile />} />
+          <Route path="recommender" element={<Recommender />} />
+          <Route path="tracker" element={<Tracker />} />
+        </Routes>
+      </div>
+      </div>
+   
   );
 };
 
-export default HeaderBar;
+export default Dashboard;
