@@ -9,10 +9,8 @@ const LoginSignup = () => {
   const navigate = useNavigate(); 
 
   const [isLogin, setIsLogin] = useState(true);
-  // States for login
   const [loginEmail, setLoginEmail] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
-  // States for signup
   const [parentName, setParentName] = useState('');
   const [infantName, setInfantName] = useState('');
   const [infantAge, setInfantAge] = useState('');
