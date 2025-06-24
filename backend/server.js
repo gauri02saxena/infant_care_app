@@ -22,7 +22,7 @@ app.post("/signup", async (req, res) => {
   try {
     const { parentName, infantName, infantAge, email, password } = req.body;
 
-    // Hash the password
+    // Hashing the password
     const hashedPassword = await bcrypt.hash(password, 12);
 
     // Vaccines data
@@ -71,7 +71,6 @@ app.post("/signup", async (req, res) => {
       { name: "Measles & Rubella (MR) - 1", ageInMonths: 12 },
       { name: "Japanese Encephalitis (JE-1)", ageInMonths: 12 },
       { name: "Pneumococcal Conjugate Vaccine - Booster*", ageInMonths: 12 },
-      // Add other vaccines and ages as necessary
     ];
 
     // Creating vaccine documents
@@ -141,12 +140,11 @@ const authenticateToken = (req, res, next) => {
 // Profile Route
 app.get("/profile", authenticateToken, async (req, res) => {
   try {
-    // Assuming the token includes the userId and not the email
     const user = await User.findById(req.user.userId).select("-password"); 
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
-    res.json(user); // Send user information excluding the password
+    res.json(user); 
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -201,26 +199,6 @@ const vaccineSchedule = {
 
 };
 
-// app.get("/vaccine-tracker/:userId", async (req, res) => {
-//   const userId = req.params.userId;
-
-//   try {
-//     const user = await User.findById(userId);
-//     if (!user) {
-//       return res.status(404).send("User not found");
-//     }
-
-//     const ageInMonths = user.infantAge; // Assuming the age is stored correctly
-//     const recommendedVaccines = vaccineSchedule[ageInMonths] || [];
-//     res.json({ recommendedVaccines });
-//   } catch (error) {
-//     console.error(error);
-//     res
-//       .status(500)
-//       .send("An error occurred while fetching vaccine recommendations");
-//   }
-// });
-
 // Vaccine Recommender Route
 app.get("/vaccine-recommender/:userId", async (req, res) => {
   const userId = req.params.userId;
@@ -231,7 +209,7 @@ app.get("/vaccine-recommender/:userId", async (req, res) => {
       return res.status(404).send("User not found");
     }
 
-    const ageInMonths = user.infantAge; // Assuming the age is stored correctly
+    const ageInMonths = user.infantAge; 
     let recommendedVaccines = vaccineSchedule[ageInMonths];
 
     if (!recommendedVaccines) {
@@ -264,7 +242,6 @@ app.get('/vaccine-tracker/:userId', authenticateToken, async (req, res) => {
     const currentAge = user.infantAge;
     let dueVaccines = [];
 
-    // Iterate over the vaccine schedule to find due vaccines
     for (const [age, vaccines] of Object.entries(vaccineSchedule)) {
       if (currentAge >= parseFloat(age)) {
         dueVaccines = [...dueVaccines, ...vaccines];
