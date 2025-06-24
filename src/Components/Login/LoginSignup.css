@@ -66,7 +66,6 @@
     text-decoration: none;
   }
   
-  /* Responsive styles */
   @media (max-width: 768px) {
     .auth-card {
       margin: 20px;
