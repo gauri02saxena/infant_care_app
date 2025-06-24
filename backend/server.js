@@ -2,8 +2,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const User = require("./models/User"); // You'll need to create this Mongoose model
-const Vaccine = require("./models/Vaccine"); // Adjust the path as per your project structure
+const User = require("./models/User"); 
+const Vaccine = require("./models/Vaccine"); 
 
 const app = express();
 app.use(express.json());
@@ -11,7 +11,7 @@ app.use(express.json());
 const cors = require("cors");
 app.use(cors());
 
-// MongoDB connection (replace with your URI)
+// MongoDB connection 
 mongoose.connect("mongodb://127.0.0.1:27017/user", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -20,13 +20,12 @@ mongoose.connect("mongodb://127.0.0.1:27017/user", {
 // Sign Up Route
 app.post("/signup", async (req, res) => {
   try {
-    // Extract user data from the request body
     const { parentName, infantName, infantAge, email, password } = req.body;
 
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 12);
 
-    // Example standard vaccines data
+    // Vaccines data
     const standardVaccines = [
       { name: "Oral Polio Vaccine (OPV) - 1", ageInMonths: 1.5 },
       { name: "Pentavalent - 1", ageInMonths: 1.5 },
@@ -75,11 +74,11 @@ app.post("/signup", async (req, res) => {
       // Add other vaccines and ages as necessary
     ];
 
-    // Create vaccine documents
+    // Creating vaccine documents
     const vaccineDocs = await Vaccine.insertMany(standardVaccines);
     const vaccineIds = vaccineDocs.map((vaccine) => vaccine._id);
 
-    // Create a new user with vaccine IDs
+    // Creating a new user with vaccine IDs
     const newUser = new User({
       parentName,
       infantName,
@@ -89,7 +88,7 @@ app.post("/signup", async (req, res) => {
       vaccines: vaccineIds,
     });
 
-    // Save the new user
+    // Saving the new user
     await newUser.save();
 
     res
@@ -124,17 +123,17 @@ app.post("/login", async (req, res) => {
 // Middleware to authenticate and set user info in the request
 const authenticateToken = (req, res, next) => {
   const authHeader = req.headers["authorization"];
-  const token = authHeader && authHeader.split(" ")[1]; // Bearer TOKEN_STRING
+  const token = authHeader && authHeader.split(" ")[1]; 
 
   if (token == null) {
-    return res.sendStatus(401); // If no token, unauthorized
+    return res.sendStatus(401); 
   }
 
   jwt.verify(token, "your-secret-key", (err, user) => {
     if (err) {
-      return res.sendStatus(403); // If token is not valid, forbidden
+      return res.sendStatus(403); 
     }
-    req.user = user; // Set the user info in request
+    req.user = user; 
     next();
   });
 };
@@ -143,7 +142,7 @@ const authenticateToken = (req, res, next) => {
 app.get("/profile", authenticateToken, async (req, res) => {
   try {
     // Assuming the token includes the userId and not the email
-    const user = await User.findById(req.user.userId).select("-password"); // Exclude the password from the result
+    const user = await User.findById(req.user.userId).select("-password"); 
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
@@ -155,7 +154,6 @@ app.get("/profile", authenticateToken, async (req, res) => {
 
 //Vaccine Recommender
 const vaccineSchedule = {
-  // Example schedule: age in months to vaccines
   1.5: [
     "Oral Polio Vaccine (OPV) - 1",
     "Pentavalent - 1",
@@ -201,7 +199,6 @@ const vaccineSchedule = {
     "Pneumococcal Conjugate Vaccine - Booster*",
   ],
 
-  // Add other ages and vaccines as appropriate
 };
 
 // app.get("/vaccine-tracker/:userId", async (req, res) => {
@@ -274,14 +271,13 @@ app.get('/vaccine-tracker/:userId', authenticateToken, async (req, res) => {
       }
     }
 
-    // Filter out administered vaccines
+    // Filtering administered vaccines
     if (user.administeredVaccines) {
       dueVaccines = dueVaccines.filter(vaccine => 
         !user.administeredVaccines.some(administered => administered.name === vaccine)
       );
     }
 
-    // Remove duplicates and sort
     dueVaccines = [...new Set(dueVaccines)].sort();
 
     res.json({ dueVaccines });
@@ -298,13 +294,11 @@ app.post('/vaccine-administered/:userId', authenticateToken, async (req, res) =>
   const { vaccineName } = req.body;
 
   try {
-    // Find the user and update
     const user = await User.findById(userId);
     if (!user) {
       return res.status(404).send("User not found");
     }
 
-    // Add the vaccine to administered vaccines if not already there
     if (!user.administeredVaccines.some(vaccine => vaccine.name === vaccineName)) {
       user.administeredVaccines.push({ name: vaccineName, dateAdministered: new Date() });
       await user.save();
@@ -320,13 +314,10 @@ app.post('/vaccine-administered/:userId', authenticateToken, async (req, res) =>
 
 //Logout route
 const handleLogout = async () => {
-  // Call the logout endpoint
   await fetch("http://localhost:5000/logout", { method: "POST" });
 
-  // Clear the token from storage
   localStorage.removeItem("token");
 
-  // Redirect to the home page
   window.location.href = "/";
 };
 
@@ -343,22 +334,17 @@ const handleLogin = async (event) => {
 
     if (response.status === 200) {
       console.log("Login successful");
-      // Store the token
       localStorage.setItem("token", response.data.token);
-
-      // Redirect to dashboard or handle dashboard data here
       history.push("/dashboard", {
         dashboardData: response.data.dashboardData,
       });
     } else {
       console.log("Login failed");
-      // Logic for handling login failure
     }
   } catch (error) {
     console.error(
       "Login failed:",
       error.response ? error.response.data : "Server error"
     );
-    // Logic for handling network or server error
   }
 };
