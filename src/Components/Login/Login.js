@@ -6,7 +6,7 @@ import './LoginSignup.css';
 
 const LoginSignup = () => {
 
-  const navigate = useNavigate(); // Instantiate useNavigate here
+  const navigate = useNavigate(); 
 
   const [isLogin, setIsLogin] = useState(true);
   // States for login
@@ -28,14 +28,12 @@ const LoginSignup = () => {
       });
       if (response.status === 200) {
         console.log('Login successful');
-        navigate('/dashboard'); // Redirect to the dashboard
+        navigate('/dashboard'); 
       } else {
         console.log('Login failed');
-        // Logic for handling login failure
       }
     } catch (error) {
       console.error('Login failed:', error.response ? error.response.data : 'Server error');
-      // Logic for handling network or server error
     }
   };
   
@@ -46,16 +44,14 @@ const LoginSignup = () => {
       const response = await axios.post('http://localhost:5000/signup', {
         parentName,
         infantName,
-        infantAge: Number(infantAge), // Converting to number
+        infantAge: Number(infantAge), 
         email: signupEmail,
         password: signupPassword,
       });
       console.log('Signup successful', response.data);
       alert('Signup successful!');
-      // Additional logic for successful signup
     } catch (error) {
       console.error('Signup failed:', error.response ? error.response.data : 'Server error');
-      // Logic for handling signup error
     }
   };
 
