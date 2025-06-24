@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom";
 const Sidebar = ({ children }) => {
   const navigate = useNavigate();
   const handleLogout = () => {
-    navigate("/login"); // Redirect to login after logout
+    navigate("/login"); 
   };
 
   const [isOpen, setIsOpen] = useState(false);
@@ -43,13 +43,6 @@ const Sidebar = ({ children }) => {
         window.location.href = 'https://www.unicef.org/india/know-your-childs-immunization-schedule?gclid=CjwKCAiAu9yqBhBmEiwAHTx5pzzoCR33Twvo6vbvSBVexPquvZoT-ksty7gTVZ0lrq_9owz9wmMl6xoChH4QAvD_BwE';
       }
     }
-    // {
-    //     path: "/logout", // This can be replaced with your logout function
-    //     name: "Logout",
-    //     icon: <FaSignOutAlt />,
-    //     className: "logout" // Add a class for the logout button
-
-    // }
   ];
   return (
     <div className="container">
@@ -65,7 +58,6 @@ const Sidebar = ({ children }) => {
         {
   menuItem.map((item, index) => {
     if (item.onClick) {
-      // Render an item that redirects to an external link
       return (
         <a key={index} className="link" onClick={item.onClick}>
           <div className="icon">{item.icon}</div>
@@ -73,7 +65,6 @@ const Sidebar = ({ children }) => {
         </a>
       );
     } else {
-      // Render a regular internal navigation link
       return (
         <NavLink to={item.path} key={index} className="link" activeClassName="active">
           <div className="icon">{item.icon}</div>
