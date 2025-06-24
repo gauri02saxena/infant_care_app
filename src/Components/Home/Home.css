@@ -83,7 +83,6 @@
     }
   
     .home .home-container {
-      /* Places image on top and text in bottom */
       flex-direction: column-reverse;
       align-items: center;
       justify-content: center;
@@ -123,7 +122,6 @@
   @media (max-width: 600px) {
   }
   
-  /* Home.css */
 .home .home-container {
   display: flex;
   justify-content: space-between;
@@ -148,12 +146,12 @@
 }
 
 .home .secondary-button {
-  background-color: #988570; /* Replace with your button color */
-  color: #fff; /* This is white, replace with your button text color if different */
+  background-color: #988570; 
+  color: #fff; 
   padding: 20px 30px;
   font-size: 1rem;
   border: none;
-  border-radius: 30px; /* Adjust as needed for roundness */
+  border-radius: 30px; 
   font-weight: bolder;
   cursor: pointer;
   display: inline-flex;
