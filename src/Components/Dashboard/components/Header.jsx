@@ -1,14 +1,12 @@
-// src/components/Header.jsx
-
 import React from 'react';
-import './Header.css'; // Import the CSS for styling
-import profileImage from './profile.jpg'; // Import the image
+import './Header.css'; 
+import profileImage from './profile.jpg'; 
 
 const Header = () => {
   return (
     <div className="header">
       <img
-        src={profileImage} // Use the imported image here
+        src={profileImage} 
         alt="Profile"
         className="profile-image"
       />
